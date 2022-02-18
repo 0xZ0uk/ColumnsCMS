@@ -1,19 +1,27 @@
 const { expect } = require("chai");
-const { ethers } = require("hardhat");
+const Columns = artifacts.require("Columns");
+const uuidv4 = require("uuid").v4;
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+describe("Columns", function (accounts) {
+  it("Should return a new Column", async function () {
+    const columns = await Columns.new();
+    await columns.createColumn("theDesk", "the first column to ever exist");
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+    const myColumns = await columns.fetchAllColumns();
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
+    assert.equal(myColumns[0].name, "theDesk");
+  });
 
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
+  it("Should update existing Column name", async function () {
+    const columns = await Columns.new();
+    await columns.createColumn("theDesk", "the first column to ever exist");
 
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+    let myColumns = await columns.fetchAllColumns();
+
+    await columns.updateColumnName("theDESK", myColumns[0].columnId);
+
+    myColumns = await columns.fetchAllColumns();
+
+    assert.equal(myColumns[0].name, "theDESK");
   });
 });

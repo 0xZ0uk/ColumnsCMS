@@ -11,8 +11,6 @@
     "sol::deploy-local": "npx hardhat run scripts/deploy.js --network localhost"
   },
   "dependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.5",
-    "@nomiclabs/hardhat-waffle": "^2.0.2",
     "@openzeppelin/contracts": "^4.5.0",
     "@walletconnect/web3-provider": "^1.7.1",
     "autoprefixer": "^10.4.2",
@@ -25,14 +23,17 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "tailwindcss": "^3.0.23",
-    "web3": "^1.7.0",
     "web3modal": "^1.9.5"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-truffle5": "^2.0.4",
+    "@nomiclabs/hardhat-web3": "^2.0.0",
     "@types/node": "17.0.18",
     "@types/react": "17.0.39",
     "eslint": "8.9.0",
     "eslint-config-next": "12.1.0",
-    "typescript": "4.5.5"
+    "typescript": "4.5.5",
+    "uuid": "^8.3.2",
+    "web3": "^1.7.0"
   }
 }
